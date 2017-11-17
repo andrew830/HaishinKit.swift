@@ -35,7 +35,7 @@ enum FLVAudioCodec:UInt8 {
         case .g711A:
             return false
         case .g711MU:
-            return false
+            return true
         case .aac:
             return true
         case .speex:

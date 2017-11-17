@@ -2,7 +2,7 @@ import Foundation
 import AVFoundation
 
 final class AudioIOComponent: IOComponent {
-    var encoder:AACEncoder = AACEncoder()
+    var encoder:ULAWEncoder = ULAWEncoder()
     var playback:AudioStreamPlayback = AudioStreamPlayback()
     let lockQueue:DispatchQueue = DispatchQueue(label: "com.haishinkit.HaishinKit.AudioIOComponent.lock")
 

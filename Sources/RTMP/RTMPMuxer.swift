@@ -10,6 +10,7 @@ protocol RTMPMuxerDelegate: class {
 // MARK: -
 final class RTMPMuxer {
     static let aac:UInt8 = FLVAudioCodec.aac.rawValue << 4 | FLVSoundRate.kHz44.rawValue << 2 | FLVSoundSize.snd16bit.rawValue << 1 | FLVSoundType.stereo.rawValue
+    static let g711MU:UInt8 = FLVAudioCodec.g711MU.rawValue << 4 | FLVSoundRate.kHz44.rawValue << 2 | FLVSoundSize.snd16bit.rawValue << 1 | FLVSoundType.mono.rawValue
 
     weak var delegate:RTMPMuxerDelegate? = nil
     private var configs:[Int:Data] = [:]
@@ -29,9 +30,9 @@ extension RTMPMuxer: AudioEncoderDelegate {
         guard let formatDescription:CMFormatDescription = formatDescription else {
             return
         }
-        var buffer:Data = Data([RTMPMuxer.aac, FLVAACPacketType.seq.rawValue])
-        buffer.append(contentsOf: AudioSpecificConfig(formatDescription: formatDescription).bytes)
-        delegate?.sampleOutput(audio: buffer, withTimestamp: 0, muxer: self)
+//        var buffer:Data = Data([RTMPMuxer.aac, FLVAACPacketType.seq.rawValue])
+//        buffer.append(contentsOf: AudioSpecificConfig(formatDescription: formatDescription).bytes)
+//        delegate?.sampleOutput(audio: buffer, withTimestamp: 0, muxer: self)
     }
 
     func sampleOutput(audio sampleBuffer: CMSampleBuffer) {
@@ -40,7 +41,7 @@ extension RTMPMuxer: AudioEncoderDelegate {
         guard let data:Data = sampleBuffer.dataBuffer?.data, 0 <= delta else {
             return
         }
-        var buffer:Data = Data([RTMPMuxer.aac, FLVAACPacketType.raw.rawValue])
+        var buffer:Data = Data(([RTMPMuxer.g711MU]))
         buffer.append(data)
         delegate?.sampleOutput(audio: buffer, withTimestamp: delta, muxer: self)
         audioTimestamp = presentationTimeStamp

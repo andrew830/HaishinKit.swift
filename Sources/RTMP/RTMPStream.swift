@@ -217,7 +217,7 @@ open class RTMPStream: NetStream {
     }
 
     static let defaultID:UInt32 = 0
-    open static let defaultAudioBitrate:UInt32 = AACEncoder.defaultBitrate
+    open static let defaultAudioBitrate:UInt32 = ULAWEncoder.defaultBitrate
     open static let defaultVideoBitrate:UInt32 = H264Encoder.defaultBitrate
     weak open var qosDelegate:RTMPStreamQoSDelegate? = nil
     open internal(set) var info:RTMPStreamInfo = RTMPStreamInfo()
@@ -580,7 +580,7 @@ open class RTMPStream: NetStream {
             metadata["videodatarate"] = mixer.videoIO.encoder.bitrate
         }
         if let _:AVCaptureInput = mixer.audioIO.input {
-            metadata["audiocodecid"] = FLVAudioCodec.aac.rawValue
+            metadata["audiocodecid"] = FLVAudioCodec.g711MU.rawValue
             metadata["audiodatarate"] = mixer.audioIO.encoder.bitrate
         }
 #endif
