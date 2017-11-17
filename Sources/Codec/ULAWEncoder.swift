@@ -65,7 +65,7 @@ final class ULAWEncoder: NSObject {
         }
     }
     var lockQueue:DispatchQueue = DispatchQueue(label: "com.haishinkit.HaishinKit.ULAWEncoder.lock")
-    weak var delegate:AudioEncoderDelegate?
+    weak var delegate:ULAWAudioEncoderDelegate?
     internal(set) var running:Bool = false
     fileprivate var maximumBuffers:Int = ULAWEncoder.defaultMaximumBuffers
     fileprivate var bufferListSize:Int = ULAWEncoder.defaultBufferListSize
