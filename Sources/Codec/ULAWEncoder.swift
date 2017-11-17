@@ -1,7 +1,7 @@
 import Foundation
 import AVFoundation
 
-protocol AudioEncoderDelegate: class {
+protocol ULAWAudioEncoderDelegate: class {
     func didSetFormatDescription(audio formatDescription:CMFormatDescription?)
     func sampleOutput(audio sampleBuffer: CMSampleBuffer)
 }
